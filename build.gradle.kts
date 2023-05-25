@@ -6,6 +6,8 @@ val logbackVersion: String = "1.4.6"
 
 plugins {
     kotlin("jvm") version "1.7.21"
+    kotlin("plugin.serialization") version "1.7.21"
+
     id("io.ktor.plugin") version "2.3.0"
 }
 
@@ -23,14 +25,24 @@ dependencies {
     testImplementation("org.testcontainers:testcontainers:1.18.0")
     testImplementation("org.testcontainers:postgresql:1.18.0")
 
+    implementation("org.postgresql:postgresql:42.6.0")
     implementation("io.ktor:ktor-server-core-jvm:$ktorVersion")
     implementation("io.ktor:ktor-server-netty-jvm:$ktorVersion")
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
+    
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktorVersion")
 }
 
 tasks.test {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        excludeTags("integration")
+    }
+}
+
+tasks.register<Test>("integrationTest") {
+    useJUnitPlatform {
+        includeTags("integration")
+    }
 }
 
 tasks.withType<KotlinCompile> {
