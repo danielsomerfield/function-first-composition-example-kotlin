@@ -4,11 +4,10 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import kotlinx.serialization.Serializable
+import restaurantRatings.domain.Restaurant
 
 
 typealias KTORController = suspend io.ktor.util.pipeline.PipelineContext<Unit, ApplicationCall>.(Unit) -> Unit
-
-data class Restaurant(val id: String, val name: String)
 
 object Controller {
 

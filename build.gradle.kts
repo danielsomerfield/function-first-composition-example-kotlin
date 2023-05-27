@@ -24,6 +24,8 @@ dependencies {
     testImplementation("com.github.kittinunf.fuel:fuel:2.3.1")
     testImplementation("org.testcontainers:testcontainers:1.18.0")
     testImplementation("org.testcontainers:postgresql:1.18.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 
     implementation("org.postgresql:postgresql:42.6.0")
     implementation("io.ktor:ktor-server-core-jvm:$ktorVersion")
@@ -31,7 +33,7 @@ dependencies {
     implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
-    
+
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktorVersion")
 }
 

@@ -6,6 +6,7 @@ import io.ktor.server.netty.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.routing.*
 import kotlinx.serialization.json.Json
+import restaurantRatings.domain.Restaurant
 
 fun main(args: Array<String>) {
     EngineMain.main(args)
