@@ -28,6 +28,8 @@ dependencies {
     implementation("org.postgresql:postgresql:42.6.0")
     implementation("io.ktor:ktor-server-core-jvm:$ktorVersion")
     implementation("io.ktor:ktor-server-netty-jvm:$ktorVersion")
+    implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
     
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktorVersion")
