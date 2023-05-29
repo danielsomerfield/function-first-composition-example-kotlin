@@ -3,9 +3,8 @@ package restaurantRatings
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
+import restaurantRatings.domain.*
 import restaurantRatings.domain.Restaurant
-import restaurantRatings.domain.RestaurantRating
-import restaurantRatings.domain.User
 import kotlin.test.expect
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -20,8 +19,8 @@ class TopRatedTest {
     )
 
     private val ratings = listOf(
-        restaurant1.id to listOf(RestaurantRating(restaurant1.id, User("user1", true))),
-        restaurant2.id to listOf(RestaurantRating(restaurant2.id, User("user2", false))),
+        restaurant1.id to listOf(RestaurantRating(Rating.EXCELLENT, User("user1", true))),
+        restaurant2.id to listOf(RestaurantRating(Rating.EXCELLENT, User("user2", false))),
     )
 
     private val ratingsByCity = listOf("vancouverbc" to ratings)

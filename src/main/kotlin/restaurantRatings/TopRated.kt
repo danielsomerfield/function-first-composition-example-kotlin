@@ -1,7 +1,7 @@
 package restaurantRatings
 
+import restaurantRatings.domain.RatingsByRestaurant
 import restaurantRatings.domain.Restaurant
-import restaurantRatings.domain.RestaurantRating
 
 object TopRated {
 
@@ -31,9 +31,4 @@ object TopRated {
     }
 }
 
-data class RatingsByRestaurant(
-    val restaurantId: String,
-    val ratings: List<RestaurantRating>
-)
-
-data class OverallRating(val restaurantId: String, val rating: Int)
+private data class OverallRating(val restaurantId: String, val rating: Int)

@@ -2,6 +2,7 @@ package restaurantRatings.integration
 
 import org.testcontainers.containers.BindMode
 import org.testcontainers.containers.PostgreSQLContainer
+import java.sql.Connection
 import java.sql.PreparedStatement
 
 class DB {
@@ -21,14 +22,18 @@ class DB {
 
     fun exec(sql: String, binder: (stmt: PreparedStatement) -> Unit) {
 
-        val connection = container.jdbcDriverInstance.connect(
-            container.jdbcUrl,
-            mapOf("user" to dbUsername, "password" to dbPassword).toProperties()
-        )
+        val connection = getConnection()
         val stmt =
             connection.prepareStatement(sql)
         binder(stmt)
         stmt.executeUpdate()
+    }
+
+    fun getConnection(): Connection {
+        return container.jdbcDriverInstance.connect(
+            container.jdbcUrl,
+            mapOf("user" to dbUsername, "password" to dbPassword).toProperties()
+        )
     }
 
     fun start() {
