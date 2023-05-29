@@ -1,5 +1,6 @@
 package restaurantRatings.integration
 
+import com.zaxxer.hikari.HikariDataSource
 import org.testcontainers.containers.BindMode
 import org.testcontainers.containers.PostgreSQLContainer
 import java.sql.Connection
@@ -9,6 +10,8 @@ class DB {
     private val dbUsername = "postgres"
     private val dbPassword = "postgres"
     private val databaseName = "postgres"
+
+    private lateinit var datasource: HikariDataSource
 
     private val container = PostgreSQLContainer("postgres:9.6.12").withFileSystemBind(
         "${System.getProperty("user.dir")}/db",
@@ -21,8 +24,7 @@ class DB {
         .withInitScript("db/init.sql")
 
     fun exec(sql: String, binder: (stmt: PreparedStatement) -> Unit) {
-
-        val connection = getConnection()
+        val connection = datasource.connection
         val stmt =
             connection.prepareStatement(sql)
         binder(stmt)
@@ -38,10 +40,15 @@ class DB {
 
     fun start() {
         container.start()
+        datasource = HikariDataSource()
+        datasource.jdbcUrl = container.getJdbcUrl()
+        datasource.username = container.getUsername()
+        datasource.password = container.getPassword()
     }
 
     fun stop() {
         container.stop()
+        datasource.close()
     }
 
 }

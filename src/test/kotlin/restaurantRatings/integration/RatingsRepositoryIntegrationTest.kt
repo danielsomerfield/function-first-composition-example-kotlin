@@ -2,6 +2,7 @@ package restaurantRatings.integration
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
@@ -43,6 +44,11 @@ class RatingsRepositoryIntegrationTest {
         users.forEach { Users.create(it, db) }
         restaurants.forEach { Restaurants.create(it, db) }
         ratingsByUsers.forEach { Ratings.create(it, db) }
+    }
+
+    @AfterEach
+    fun shutdown() {
+        db.stop()
     }
 
     @Test
