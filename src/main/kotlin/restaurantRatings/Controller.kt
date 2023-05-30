@@ -12,7 +12,7 @@ typealias KTORController = suspend io.ktor.util.pipeline.PipelineContext<Unit, A
 object Controller {
 
     interface Dependencies {
-        suspend fun getTopRestaurants(city: String): List<Restaurant>
+        val getTopRestaurants: suspend (String) -> List<Restaurant>
     }
 
     fun createTopRatedController(dependencies: Dependencies): KTORController {

@@ -4,14 +4,18 @@ import com.github.kittinunf.fuel.Fuel
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.junit.jupiter.api.*
+import restaurantRatings.Configuration
+import restaurantRatings.RatingsDb
+import restaurantRatings.Server
+import java.util.*
 import kotlin.test.expect
 
-@Disabled
 @Tag("integration")
 class E2EIntegrationTest {
 
     private val server = Server()
     private val db = DB()
+    private val port = Random().nextInt(9000, 9999)
 
     private val users = arrayOf(
         User(id = "user1", name = "User 1", trusted = true),
@@ -39,7 +43,15 @@ class E2EIntegrationTest {
         restaurants.forEach { Restaurants.create(it, db) }
         ratingsByUsers.forEach { Ratings.create(it, db) }
 
-        server.start()
+        server.start {
+            Configuration(
+                port, RatingsDb(
+                    user = "postgres",
+                    password = "postgres",
+                    jdbcUrl = "jdbc:postgresql://localhost:${db.port()}/postgres"
+                )
+            )
+        }
     }
 
     @AfterEach
@@ -50,7 +62,7 @@ class E2EIntegrationTest {
 
     @Test
     fun testRestaurantRankings() {
-        val (_, response, _) = Fuel.get("http://localhost:8080/vancouverbc/restaurants/recommended").response()
+        val (_, response, _) = Fuel.get("http://localhost:${port}/vancouverbc/restaurants/recommended").response()
         expect(200) { response.statusCode }
         val restaurantsResponse = Json.decodeFromString<ResponsePayload>(response.body().asString("application/json"))
         expect(listOf("cafegloucesterid", "burgerkingid")) { restaurantsResponse.restaurants.map { it.id } }

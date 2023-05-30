@@ -38,8 +38,7 @@ class RestaurantRepositoryIntegrationTest {
     @Test
     fun `it loads a restaurant by id`() = runTest {
         val dependencies = object : RestaurantRepository.Dependencies {
-            override fun getConnection(): Connection = db.getConnection()
-            override fun releaseConnection(connection: Connection): Unit = connection.close()
+            override val getConnection: () -> Connection = { db.getConnection() }
         }
         val maybeRestaurant = createGetRestaurantById(dependencies)(cafeGloucester.id)
         expect(true) { maybeRestaurant.isPresent }
@@ -52,8 +51,7 @@ class RestaurantRepositoryIntegrationTest {
     @Test
     fun `it returns empty for non-existent restaurant`() = runTest {
         val dependencies = object : RestaurantRepository.Dependencies {
-            override fun getConnection(): Connection = db.getConnection()
-            override fun releaseConnection(connection: Connection): Unit = connection.close()
+            override val getConnection = { db.getConnection() }
         }
         val maybeRestaurant = createGetRestaurantById(dependencies)("non-existent-restaurant")
         expect(false) { maybeRestaurant.isPresent }

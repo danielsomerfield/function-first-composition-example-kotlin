@@ -24,11 +24,10 @@ object RatingsRepository {
     """.trimIndent()
 
     interface Dependencies {
-        fun getConnection(): Connection
-        fun releaseConnection(connection: Connection)
+        val getConnection: () -> Connection
     }
 
-    fun createFindRatingsByRestaurant(dependencies: Dependencies): () -> List<RatingsByRestaurant> {
+    fun createFindRatingsByRestaurant(dependencies: Dependencies): suspend (city: String) -> List<RatingsByRestaurant> {
         return {
             dependencies.getConnection().use { conn ->
                 val stmt = conn.prepareStatement(findRatingsByRestaurantSQL)

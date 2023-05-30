@@ -5,6 +5,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
 import restaurantRatings.domain.*
 import restaurantRatings.domain.Restaurant
+import java.util.*
 import kotlin.test.expect
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -28,18 +29,17 @@ class TopRatedTest {
     @Test
     fun `The top rated restaurant list is calculated from our proprietary ratings algorithm`() = runTest {
         val dependencies = object : TopRated.Dependencies {
-            override suspend fun getRestaurantById(id: String): Restaurant? = restaurantsById[id]
-
-            override suspend fun findRatingsByRestaurant(city: String): List<RatingsByRestaurant> {
-                return ratingsByCity
+            override val getRestaurantById: suspend (id: String) -> Optional<Restaurant> =
+                { id -> Optional.ofNullable(restaurantsById[id]) }
+            override val findRatingsByRestaurant: suspend (city: String) -> List<RatingsByRestaurant> = { city ->
+                ratingsByCity
                     .filter { it.first == city }
                     .flatMap { it.second }
                     .map { RatingsByRestaurant(it.first, it.second) }
             }
 
-            override fun calculateRatingForRestaurant(ratings: RatingsByRestaurant): Int {
-                // I don't know how this is going to work, so I'll use a dumb but predictable stub
-                return if (ratings.restaurantId === restaurant1.id) {
+            override val calculateRatingForRestaurant: (ratings: RatingsByRestaurant) -> Int = { ratings ->
+                if (ratings.restaurantId === restaurant1.id) {
                     10
                 } else if (ratings.restaurantId == restaurant2.id) {
                     5
@@ -47,6 +47,7 @@ class TopRatedTest {
                     throw RuntimeException("Unknown restaurant");
                 }
             }
+
         }
 
         val getTopRated = TopRated.create(dependencies)

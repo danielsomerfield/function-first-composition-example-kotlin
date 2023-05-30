@@ -6,8 +6,7 @@ import java.util.*
 
 object RestaurantRepository {
     interface Dependencies {
-        fun getConnection(): Connection
-        fun releaseConnection(connection: Connection): Unit
+        val getConnection: () -> Connection
     }
 
     private val findRestaurantByIdSQL = """
@@ -16,7 +15,7 @@ object RestaurantRepository {
         from restaurant r WHERE id = ?
     """.trimIndent()
 
-    fun createGetRestaurantById(dependencies: Dependencies): (id: String) -> Optional<Restaurant> {
+    fun createGetRestaurantById(dependencies: Dependencies): suspend (id: String) -> Optional<Restaurant> {
         return { id ->
             dependencies.getConnection().use { conn ->
                 val stmt = conn.prepareStatement(findRestaurantByIdSQL)

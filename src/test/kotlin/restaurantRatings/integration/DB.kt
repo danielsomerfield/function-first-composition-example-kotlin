@@ -51,6 +51,7 @@ class DB {
         datasource.close()
     }
 
+    fun port(): Int = container.getMappedPort(PostgreSQLContainer.POSTGRESQL_PORT)
 }
 
 object Users {
@@ -65,21 +66,21 @@ object Users {
 
 object Restaurants {
     fun create(r: Restaurant, db: DB) {
-        db.exec("insert into restaurant (id, name) values (?, ?)") { stmt ->
+        db.exec("insert into restaurant (id, name, city) values (?, ?, ?)") { stmt ->
             stmt.setString(1, r.id)
             stmt.setString(2, r.name)
+            stmt.setString(3, "vancouverbc")
         }
     }
 }
 
 object Ratings {
     fun create(r: RatingByUser, db: DB): Unit {
-        db.exec("insert into restaurant_rating (id, restaurant_id, rating, rated_by_user_id, city) values (?, ?, ?, ?, ?)") { stmt ->
+        db.exec("insert into restaurant_rating (id, restaurant_id, rating, rated_by_user_id) values (?, ?, ?, ?)") { stmt ->
             stmt.setString(1, r.id)
             stmt.setString(2, r.restaurant.id)
             stmt.setString(3, r.rating)
             stmt.setString(4, r.user.id)
-            stmt.setString(5, "vancouverbc")
         }
     }
 }

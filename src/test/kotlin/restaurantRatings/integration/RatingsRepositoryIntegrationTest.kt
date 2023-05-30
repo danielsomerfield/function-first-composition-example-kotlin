@@ -54,11 +54,10 @@ class RatingsRepositoryIntegrationTest {
     @Test
     fun `it loads ratings by restaurant`() = runTest {
         val dependencies = object : RatingsRepository.Dependencies {
-            override fun getConnection(): Connection = db.getConnection()
-            override fun releaseConnection(connection: Connection): Unit = connection.close()
+            override val getConnection: () -> Connection = { db.getConnection() }
         }
         val findRatings = createFindRatingsByRestaurant(dependencies)
-        val ratings = findRatings().sortedBy { it.restaurantId }
+        val ratings = findRatings("vancouverbc").sortedBy { it.restaurantId }
 
         expect(2) { ratings.size }
 
