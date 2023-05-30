@@ -6,8 +6,8 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
-import restaurantRatings.RestaurantRepository
-import restaurantRatings.RestaurantRepository.createGetRestaurantById
+import rateMyMeal.restaurantRatings.RestaurantRepository
+import rateMyMeal.restaurantRatings.RestaurantRepository.createGetRestaurantById
 import java.sql.Connection
 import kotlin.test.expect
 

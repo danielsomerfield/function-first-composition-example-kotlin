@@ -1,4 +1,4 @@
-package restaurantRatings
+package rateMyMeal
 
 import kotlinx.serialization.Serializable
 

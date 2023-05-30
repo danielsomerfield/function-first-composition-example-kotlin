@@ -1,4 +1,4 @@
-package restaurantRatings.domain
+package rateMyMeal.restaurantRatings.domain
 
 data class RestaurantRating(val rating: Rating, val ratedByUser: User)
 

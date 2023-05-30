@@ -1,4 +1,4 @@
-package restaurantRatings
+package rateMyMeal
 
 data class Configuration(val serverPort: Int, val ratingsDb: RatingsDb) {
 

@@ -4,9 +4,9 @@ import com.github.kittinunf.fuel.Fuel
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.junit.jupiter.api.*
-import restaurantRatings.Configuration
-import restaurantRatings.RatingsDb
-import restaurantRatings.Server
+import rateMyMeal.Configuration
+import rateMyMeal.RatingsDb
+import rateMyMeal.Server
 import java.util.*
 import kotlin.test.expect
 
@@ -43,7 +43,7 @@ class E2EIntegrationTest {
         restaurants.forEach { Restaurants.create(it, db) }
         ratingsByUsers.forEach { Ratings.create(it, db) }
 
-        server.start {
+        server.start({
             Configuration(
                 port, RatingsDb(
                     user = "postgres",
@@ -52,6 +52,7 @@ class E2EIntegrationTest {
                 )
             )
         }
+        )
     }
 
     @AfterEach

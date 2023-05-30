@@ -6,9 +6,9 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
-import restaurantRatings.RatingsRepository
-import restaurantRatings.RatingsRepository.createFindRatingsByRestaurant
-import restaurantRatings.domain.Rating
+import rateMyMeal.restaurantRatings.RatingsRepository
+import rateMyMeal.restaurantRatings.RatingsRepository.createFindRatingsByRestaurant
+import rateMyMeal.restaurantRatings.domain.Rating
 import java.sql.Connection
 import kotlin.test.expect
 

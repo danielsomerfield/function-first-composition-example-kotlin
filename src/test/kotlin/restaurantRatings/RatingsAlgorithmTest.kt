@@ -1,11 +1,11 @@
 package restaurantRatings
 
 import org.junit.jupiter.api.Test
-import restaurantRatings.RatingsAlgorithm.calculateRatingForRestaurant
-import restaurantRatings.domain.Rating
-import restaurantRatings.domain.RatingsByRestaurant
-import restaurantRatings.domain.RestaurantRating
-import restaurantRatings.domain.User
+import rateMyMeal.restaurantRatings.RatingsAlgorithm.calculateRatingForRestaurant
+import rateMyMeal.restaurantRatings.domain.Rating
+import rateMyMeal.restaurantRatings.domain.RatingsByRestaurant
+import rateMyMeal.restaurantRatings.domain.RestaurantRating
+import rateMyMeal.restaurantRatings.domain.User
 import kotlin.test.expect
 
 class RatingsAlgorithmTest {

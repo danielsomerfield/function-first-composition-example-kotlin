@@ -1,7 +1,7 @@
-package restaurantRatings
+package rateMyMeal.restaurantRatings
 
-import restaurantRatings.domain.RatingsByRestaurant
-import restaurantRatings.domain.Restaurant
+import rateMyMeal.restaurantRatings.domain.RatingsByRestaurant
+import rateMyMeal.restaurantRatings.domain.Restaurant
 import java.util.*
 
 object TopRated {

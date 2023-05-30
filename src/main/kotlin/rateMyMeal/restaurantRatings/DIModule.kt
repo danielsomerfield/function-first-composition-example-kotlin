@@ -1,4 +1,4 @@
-package restaurantRatings
+package rateMyMeal.restaurantRatings
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -7,8 +7,9 @@ import io.ktor.server.application.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.routing.*
 import kotlinx.serialization.json.Json
-import restaurantRatings.domain.RatingsByRestaurant
-import restaurantRatings.domain.Restaurant
+import rateMyMeal.Configuration
+import rateMyMeal.restaurantRatings.domain.RatingsByRestaurant
+import rateMyMeal.restaurantRatings.domain.Restaurant
 import java.sql.Connection
 import java.util.*
 
@@ -23,12 +24,12 @@ object ProductionFactories : Factories {
         TopRated::create
 }
 
-fun Application.restaurantRatings(
+fun Application.initRestaurantRatings(
     configuration: Configuration,
     factories: Factories = ProductionFactories,
 ) {
 
-    val dbDependencies = object : RatingsRepository.Dependencies, RestaurantRepository.Dependencies{
+    val dbDependencies = object : RatingsRepository.Dependencies, RestaurantRepository.Dependencies {
         private val dbConfig = configuration.ratingsDb
         private val hikariConfig = HikariConfig(
             mapOf(

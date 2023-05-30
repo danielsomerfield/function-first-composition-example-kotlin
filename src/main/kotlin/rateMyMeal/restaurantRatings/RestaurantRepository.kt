@@ -1,6 +1,6 @@
-package restaurantRatings
+package rateMyMeal.restaurantRatings
 
-import restaurantRatings.domain.Restaurant
+import rateMyMeal.restaurantRatings.domain.Restaurant
 import java.sql.Connection
 import java.util.*
 

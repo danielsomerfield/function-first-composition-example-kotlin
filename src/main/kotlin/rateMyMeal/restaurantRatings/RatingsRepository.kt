@@ -1,10 +1,10 @@
-package restaurantRatings
+package rateMyMeal.restaurantRatings
 
 import org.slf4j.LoggerFactory
-import restaurantRatings.domain.Rating
-import restaurantRatings.domain.RatingsByRestaurant
-import restaurantRatings.domain.RestaurantRating
-import restaurantRatings.domain.User
+import rateMyMeal.restaurantRatings.domain.Rating
+import rateMyMeal.restaurantRatings.domain.RatingsByRestaurant
+import rateMyMeal.restaurantRatings.domain.RestaurantRating
+import rateMyMeal.restaurantRatings.domain.User
 import java.sql.Connection
 import java.sql.ResultSet
 import java.util.*

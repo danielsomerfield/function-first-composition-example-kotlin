@@ -3,8 +3,8 @@ package restaurantRatings
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
-import restaurantRatings.domain.*
-import restaurantRatings.domain.Restaurant
+import rateMyMeal.restaurantRatings.TopRated
+import rateMyMeal.restaurantRatings.domain.*
 import java.util.*
 import kotlin.test.expect
 
@@ -44,14 +44,14 @@ class TopRatedTest {
                 } else if (ratings.restaurantId == restaurant2.id) {
                     5
                 } else {
-                    throw RuntimeException("Unknown restaurant");
+                    throw RuntimeException("Unknown restaurant")
                 }
             }
 
         }
 
         val getTopRated = TopRated.create(dependencies)
-        val topRestaurants = getTopRated("vancouverbc");
+        val topRestaurants = getTopRated("vancouverbc")
         expect(2) { topRestaurants.size }
         expect(restaurant1.id) { topRestaurants[0].id }
         expect(restaurant1.name) { topRestaurants[0].name }

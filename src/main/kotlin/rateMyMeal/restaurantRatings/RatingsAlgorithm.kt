@@ -1,6 +1,6 @@
-package restaurantRatings
+package rateMyMeal.restaurantRatings
 
-import restaurantRatings.domain.RatingsByRestaurant
+import rateMyMeal.restaurantRatings.domain.RatingsByRestaurant
 
 object RatingsAlgorithm {
     fun calculateRatingForRestaurant(ratings: RatingsByRestaurant): Int {
