@@ -55,5 +55,5 @@ and decided to try this approach. If time permits, I'll make some changes to be 
     REVIEW_DATABASE_USER=postgres REVIEW_DATABASE_PASSWORD=postgres \
       REVIEW_DATABASE_JDBC_URL=jdbc:postgresql://localhost:5432/postgres ./gradlew run
 
-You should then be able to access the service endpoint at `http://localhost:8080/restaurants/recommended`
+You should then be able to access the service endpoint at `http://localhost:8080/vancouverbc/restaurants/recommended`
 
