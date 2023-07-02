@@ -10,7 +10,7 @@ examples, but this is a port for Kotlin, which means the pattern is necessarily 
 
 - Each component module defines a type with its own dependent functions.
 - At the top level of the injection is done via the `Application.kt`
-- Rather than constructors for components, typescript modules expose a factory function that takes dependencies and
+- Rather than constructors for components, modules expose a factory function that takes dependencies and
   returns either a "configured" function or component.
 
 # Differences from the Typescript Example
